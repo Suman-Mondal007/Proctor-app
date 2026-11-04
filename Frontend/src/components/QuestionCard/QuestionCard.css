@@ -1,0 +1,316 @@
+/* ==========================================================================
+   QUESTION CARD COMPONENT — LIGHT BLUE THEME
+   (aligned to shared design tokens used across Dashboard / Exam / etc.)
+   ========================================================================== */
+
+:root {
+  --blue-50:  #eef6ff;
+  --blue-100: #dceeff;
+  --blue-200: #b9dcff;
+  --blue-300: #8ac4ff;
+  --blue-400: #57a5f7;
+  --blue-500: #2f86ea;
+  --blue-600: #1f6fd6;
+  --blue-700: #1857ab;
+
+  --ink-900: #142438;
+  --ink-700: #33475b;
+  --ink-500: #64809c;
+  --ink-300: #a9c0d6;
+
+  --surface: #ffffff;
+  --surface-soft: #f5faff;
+  --border: #d7e7f7;
+
+  --shadow-sm: 0 2px 6px rgba(20, 63, 128, 0.06);
+  --shadow-md: 0 10px 26px rgba(31, 111, 214, 0.12);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --speed: 0.22s;
+
+  --font-display: "Poppins", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+}
+
+/* ==========================================================================
+   Card Shell
+   ========================================================================== */
+
+.question-card {
+  background: var(--surface);
+  border: 2px solid var(--blue-200);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--speed) var(--ease), border-color var(--speed) var(--ease);
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+  animation: cardFadeIn 0.3s var(--ease);
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.question-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-300);
+}
+
+/* ==========================================================================
+   Header & Badges
+   ========================================================================== */
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--blue-50);
+}
+
+.question-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin: 0;
+}
+
+.question-type-badge {
+  background: var(--blue-100);
+  color: var(--blue-600);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--blue-200);
+  transition: background var(--speed) var(--ease), transform var(--speed) var(--ease);
+}
+
+.question-card:hover .question-type-badge {
+  background: var(--blue-200);
+}
+
+/* ==========================================================================
+   Question Statement Text
+   ========================================================================== */
+
+.question-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink-700);
+  margin-bottom: 20px;
+}
+
+.question-text p {
+  margin: 0;
+}
+
+/* Answer-progress hint under the question — quick visual info on selection state */
+.answer-status-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-500);
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Options Stack
+   ========================================================================== */
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual Option Tile */
+.option-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: background var(--speed) var(--ease),
+              border-color var(--speed) var(--ease),
+              transform var(--speed) var(--ease),
+              box-shadow var(--speed) var(--ease);
+  position: relative;
+  user-select: none;
+  animation: optionFadeIn 0.3s var(--ease) both;
+}
+
+.options-container .option-tile:nth-child(1) { animation-delay: 0.02s; }
+.options-container .option-tile:nth-child(2) { animation-delay: 0.06s; }
+.options-container .option-tile:nth-child(3) { animation-delay: 0.10s; }
+.options-container .option-tile:nth-child(4) { animation-delay: 0.14s; }
+.options-container .option-tile:nth-child(5) { animation-delay: 0.18s; }
+.options-container .option-tile:nth-child(6) { animation-delay: 0.22s; }
+
+@keyframes optionFadeIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.option-tile:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-300);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.option-tile:active {
+  transform: translateY(0) scale(0.995);
+}
+
+/* Selected State */
+.option-tile.selected {
+  background: var(--blue-50);
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 4px rgba(47, 134, 234, 0.14);
+}
+
+/* Little checkmark badge that appears on the selected tile —
+   extra visual confirmation beyond the radio dot. */
+.option-tile.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%) scale(0.6);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--blue-600);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: checkPop 0.25s var(--ease) forwards;
+}
+
+@keyframes checkPop {
+  to { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* Option Prefix Letter Circle (A, B, C, D) */
+.option-prefix {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--ink-700);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease), transform var(--speed) var(--ease);
+}
+
+.option-tile:hover .option-prefix {
+  background: var(--blue-200);
+  color: var(--blue-700);
+  transform: scale(1.06);
+}
+
+.option-tile.selected .option-prefix {
+  background: var(--blue-600);
+  color: #ffffff;
+}
+
+/* Custom Radio Input Styling */
+.option-tile input[type="radio"] {
+  accent-color: var(--blue-600);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Label Styling */
+.option-label {
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink-700);
+  flex: 1;
+  line-height: 1.4;
+  padding-right: 26px; /* keep clear of the checkmark badge */
+}
+
+.option-tile.selected .option-label {
+  color: var(--ink-900);
+  font-weight: 600;
+}
+
+.no-options-text {
+  color: var(--ink-500);
+  font-style: italic;
+  font-size: 0.95rem;
+  padding: 12px 0;
+}
+
+/* ==========================================================================
+   Responsive Scaling
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .question-card {
+    padding: 20px;
+  }
+
+  .question-text {
+    font-size: 0.98rem;
+  }
+
+  .option-tile {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .option-label {
+    font-size: 0.9rem;
+    padding-right: 22px;
+  }
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.option-tile:focus-within {
+  outline: 2px solid var(--blue-700);
+  outline-offset: 2px;
+}

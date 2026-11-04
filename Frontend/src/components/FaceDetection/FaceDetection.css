@@ -1,0 +1,28 @@
+.face-status {
+  margin-top: 15px;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+}
+
+.face-status h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.face-status .status-text {
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.face-status .status-text.verified {
+  color: #22c55e;
+}
+
+.face-status .status-text.warning {
+  color: #ef4444;
+}

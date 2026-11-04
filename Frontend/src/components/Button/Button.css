@@ -1,0 +1,122 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 25px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+
+  outline: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Primary */
+
+.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.primary:hover {
+  background: #1d4ed8;
+}
+
+/* Success */
+
+.success {
+  background: #16a34a;
+  color: white;
+}
+
+.success:hover {
+  background: #15803d;
+}
+
+/* Danger */
+
+.danger {
+  background: #dc2626;
+  color: white;
+}
+
+.danger:hover {
+  background: #b91c1c;
+}
+
+/* Warning */
+
+.warning {
+  background: #f59e0b;
+  color: white;
+}
+
+.warning:hover {
+  background: #d97706;
+}
+
+/* Secondary */
+
+.secondary {
+  background: #374151;
+  color: white;
+}
+
+.secondary:hover {
+  background: #1f2937;
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Loader */
+
+.loader {
+
+  width:18px;
+
+  height:18px;
+
+  border:3px solid white;
+
+  border-top:3px solid transparent;
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.btn-icon{
+
+display:flex;
+
+align-items:center;
+
+}
