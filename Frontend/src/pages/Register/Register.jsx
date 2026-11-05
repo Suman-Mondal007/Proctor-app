@@ -80,7 +80,7 @@ function Register() {
 
   return (
     <div className="register-page">
-      <div className="ambient-glow"></div>
+      <div className="reg-glow"></div>
 
       <div className="register-wrapper">
         <header className="register-header">
@@ -99,14 +99,14 @@ function Register() {
             </svg>
           </div>
           <h2>
-            Candidate <span className="text-gradient">Registration</span>
+            Candidate <span className="reg-gradient">Registration</span>
           </h2>
-          <p className="subtitle">Join the AI Proctored Examination Platform</p>
+          <p className="reg-subtitle">Join the AI Proctored Examination Platform</p>
         </header>
 
         <div className="register-card">
           {status.message && (
-            <div className={`status-alert ${status.type}`}>
+            <div className={`status-alert ${status.type}`} role="alert">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 {status.type === "error" ? (
                   <>
@@ -138,6 +138,7 @@ function Register() {
                   type="text"
                   name="name"
                   placeholder="John Doe"
+                  autoComplete="name"
                   value={form.name}
                   onChange={handleChange}
                   required
@@ -157,6 +158,7 @@ function Register() {
                   type="email"
                   name="email"
                   placeholder="candidate@university.edu"
+                  autoComplete="email"
                   value={form.email}
                   onChange={handleChange}
                   required
@@ -176,6 +178,7 @@ function Register() {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Minimum 6 characters"
+                  autoComplete="new-password"
                   value={form.password}
                   onChange={handleChange}
                   required
@@ -185,6 +188,7 @@ function Register() {
                   className="toggle-password-btn"
                   onClick={() => setShowPassword(!showPassword)}
                   tabIndex="-1"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -216,6 +220,7 @@ function Register() {
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   placeholder="Re-enter password"
+                  autoComplete="new-password"
                   value={form.confirmPassword}
                   onChange={handleChange}
                   required
@@ -225,6 +230,7 @@ function Register() {
                   className="toggle-password-btn"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   tabIndex="-1"
+                  aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
                 >
                   {showConfirmPassword ? (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -244,7 +250,7 @@ function Register() {
             <button className="register-btn" disabled={loading}>
               {loading ? (
                 <span className="btn-loading">
-                  <span className="spinner"></span> Creating Account...
+                  <span className="reg-spinner"></span> Creating Account...
                 </span>
               ) : (
                 "Create Account"
@@ -264,13 +270,18 @@ function Register() {
 
           <p className="login-link">
             Already have an account?{" "}
-            <span onClick={() => navigate("/login")} role="button" tabIndex={0}>
+            <span
+              onClick={() => navigate("/login")}
+              onKeyDown={(e) => e.key === "Enter" && navigate("/login")}
+              role="button"
+              tabIndex={0}
+            >
               Login
             </span>
           </p>
         </div>
 
-        <button className="back-btn" onClick={() => navigate("/signin")}>
+        <button className="reg-back-btn" onClick={() => navigate("/signin")}>
           &larr; Switch Portal Type
         </button>
       </div>

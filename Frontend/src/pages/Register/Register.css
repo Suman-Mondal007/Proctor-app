@@ -1,322 +1,494 @@
-:root {
-  --bg-dark: #0b0f19;
-  --card-bg: rgba(18, 24, 38, 0.75);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --primary-accent: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-glow: rgba(99, 102, 241, 0.2);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --error-bg: rgba(239, 68, 68, 0.1);
-  --error-border: rgba(239, 68, 68, 0.3);
-  --error-text: #fca5a5;
-  --success-bg: rgba(34, 197, 94, 0.1);
-  --success-border: rgba(34, 197, 94, 0.3);
-  --success-text: #86efac;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ==========================================================================
+   ProctorPortal — Candidate Registration
+   Light Blue Theme (matches the dashboard)
+   Everything is scoped under .register-page so it can't affect other pages
+   ========================================================================== */
 
 .register-page {
+  --rg-blue-50:  #eef6ff;
+  --rg-blue-100: #dceeff;
+  --rg-blue-200: #b9dcff;
+  --rg-blue-300: #8ac4ff;
+  --rg-blue-400: #57a5f7;
+  --rg-blue-500: #2f86ea;
+  --rg-blue-600: #1f6fd6;
+  --rg-blue-700: #1857ab;
+  --rg-purple:   #7c6cf0;
+  --rg-green:    #17a673;
+  --rg-green-bg: #e2f8ef;
+  --rg-red:      #e34d5c;
+  --rg-red-bg:   #fdeaec;
+  --rg-amber-bg: #fff4e0;
+
+  --rg-ink-900: #142438;
+  --rg-ink-700: #33475b;
+  --rg-ink-500: #64809c;
+  --rg-ink-300: #a9c0d6;
+
+  --rg-surface: #ffffff;
+  --rg-soft: #f5faff;
+  --rg-bg: #eaf3fc;
+  --rg-border: #d7e7f7;
+  --rg-border-soft: #e6f0fa;
+
+  --rg-shadow-sm: 0 1px 3px rgba(20, 63, 128, 0.08);
+  --rg-shadow-md: 0 8px 24px rgba(31, 111, 214, 0.10);
+  --rg-shadow-lg: 0 20px 45px rgba(20, 63, 128, 0.16);
+
+  --rg-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --rg-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  position: relative;
   min-height: 100vh;
-  background-color: var(--bg-dark);
-  color: var(--text-main);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  position: relative;
   overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--rg-bg);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(87, 165, 247, 0.14), transparent 45%),
+    radial-gradient(circle at 90% 0%, rgba(124, 108, 240, 0.12), transparent 40%);
+  color: var(--rg-ink-900);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
-/* Radial Glow Background */
-.ambient-glow {
+.register-page *,
+.register-page *::before,
+.register-page *::after {
+  box-sizing: border-box;
+}
+
+/* Soft animated glow behind the card */
+.register-page .reg-glow {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0, 0, 0, 0) 70%);
-  top: 50%;
+  top: -160px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  width: 900px;
+  height: 520px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(47, 134, 234, 0.20), transparent 70%);
+  filter: blur(10px);
   pointer-events: none;
+  z-index: 0;
+  animation: regGlow 12s ease-in-out infinite alternate;
 }
 
-.register-wrapper {
+@keyframes regGlow {
+  from { transform: translateX(-54%) translateY(0); }
+  to   { transform: translateX(-46%) translateY(16px); }
+}
+
+.register-page .register-wrapper {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: regRise 0.5s var(--rg-ease);
 }
 
-/* Header */
-.register-header {
+@keyframes regRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Header ---------- */
+.register-page .register-header {
   text-align: center;
   margin-bottom: 24px;
 }
 
-.logo-icon-box {
-  width: 44px;
-  height: 44px;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 12px;
+.register-page .logo-icon-box {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 14px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--rg-blue-400), var(--rg-blue-700));
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 12px auto;
-  color: #818cf8;
+  box-shadow: 0 10px 22px rgba(31, 111, 214, 0.32);
+  transition: transform 0.3s var(--rg-spring);
 }
 
-.register-header h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 6px;
+.register-page .logo-icon-box:hover {
+  transform: rotate(-8deg) scale(1.08);
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+.register-page .register-header h2 {
+  margin: 0 0 8px;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--rg-ink-900);
+}
+
+.register-page .reg-gradient {
+  background: linear-gradient(135deg, var(--rg-blue-500), var(--rg-purple));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-.subtitle {
-  color: var(--text-muted);
-  font-size: 0.88rem;
+.register-page .reg-subtitle {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--rg-ink-500);
 }
 
-/* Card Container */
-.register-card {
+/* ---------- Card ---------- */
+.register-page .register-card {
+  position: relative;
   width: 100%;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(16px);
-  border-radius: 20px;
-  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+  padding: 34px 30px 28px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-border);
+  border-radius: 20px;
+  box-shadow: var(--rg-shadow-lg);
+  overflow: hidden;
+  transition: box-shadow 0.3s var(--rg-ease), transform 0.3s var(--rg-ease);
 }
 
-.register-card form {
+.register-page .register-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rg-blue-400), var(--rg-purple), var(--rg-blue-400));
+  background-size: 200% 100%;
+  animation: regBar 8s linear infinite;
+}
+
+@keyframes regBar {
+  to { background-position: 200% 0; }
+}
+
+.register-page .register-card:hover {
+  box-shadow: 0 26px 55px rgba(20, 63, 128, 0.20);
+}
+
+.register-page .register-card form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Status Banners */
-.status-alert {
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 0.85rem;
+/* ---------- Status banner ---------- */
+.register-page .status-alert {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  animation: regFade 0.25s var(--rg-ease);
 }
 
-.status-alert.error {
-  background: var(--error-bg);
-  border: 1px solid var(--error-border);
-  color: var(--error-text);
+@keyframes regFade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.status-alert.success {
-  background: var(--success-bg);
-  border: 1px solid var(--success-border);
-  color: var(--success-text);
-}
-
-.status-alert svg {
+.register-page .status-alert svg {
   flex-shrink: 0;
 }
 
-/* Form Groups & Inputs */
-.input-group {
+.register-page .status-alert.error {
+  background: var(--rg-red-bg);
+  border: 1px solid #f8cdd2;
+  color: #c0303f;
+}
+
+.register-page .status-alert.success {
+  background: var(--rg-green-bg);
+  border: 1px solid #bfeedb;
+  color: #0e7a54;
+}
+
+/* ---------- Inputs ---------- */
+.register-page .input-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
-.label-row {
+.register-page .label-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.input-group label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-muted);
+.register-page .input-group label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--rg-ink-700);
 }
 
-.match-tag {
-  font-size: 0.75rem;
-  font-weight: 500;
+.register-page .match-tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  animation: regFade 0.2s var(--rg-ease);
 }
 
-.match-tag.success {
-  color: #86efac;
-}
+.register-page .match-tag.success { color: var(--rg-green); }
+.register-page .match-tag.error   { color: var(--rg-red); }
 
-.match-tag.error {
-  color: #fca5a5;
-}
-
-.input-wrapper {
+.register-page .input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.input-icon {
+.register-page .input-icon {
   position: absolute;
   left: 14px;
-  color: #64748b;
+  color: var(--rg-ink-300);
   pointer-events: none;
+  transition: color 0.2s var(--rg-ease), transform 0.2s var(--rg-ease);
 }
 
-.input-group input {
+.register-page .input-wrapper:focus-within .input-icon {
+  color: var(--rg-blue-500);
+  transform: scale(1.1);
+}
+
+.register-page .input-group input {
   width: 100%;
-  padding: 12px 14px 12px 42px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: #fff;
+  padding: 12px 44px 12px 42px;
+  background: var(--rg-soft);
+  border: 1.5px solid var(--rg-border);
+  border-radius: 12px;
+  color: var(--rg-ink-900);
+  font-family: inherit;
   font-size: 0.95rem;
-  transition: all 0.2s ease;
   outline: none;
+  transition: border-color 0.2s var(--rg-ease), box-shadow 0.2s var(--rg-ease), background 0.2s var(--rg-ease);
 }
 
-.input-group input:focus {
-  border-color: var(--primary-accent);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-  background: rgba(15, 23, 42, 0.8);
+.register-page .input-group input::placeholder {
+  color: var(--rg-ink-300);
 }
 
-.toggle-password-btn {
+.register-page .input-group input:hover {
+  border-color: var(--rg-blue-300);
+}
+
+.register-page .input-group input:focus {
+  background: #fff;
+  border-color: var(--rg-blue-500);
+  box-shadow: 0 0 0 4px rgba(47, 134, 234, 0.14);
+}
+
+.register-page .toggle-password-btn {
   position: absolute;
-  right: 12px;
-  background: none;
-  border: none;
-  color: #64748b;
-  cursor: pointer;
+  right: 8px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  transition: color 0.2s ease;
-}
-
-.toggle-password-btn:hover {
-  color: var(--text-main);
-}
-
-/* Submit Button */
-.register-btn {
-  width: 100%;
-  padding: 14px;
-  background: var(--primary-accent);
-  color: #ffffff;
+  padding: 0;
+  background: transparent;
   border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  border-radius: 50%;
+  color: var(--rg-ink-500);
+  cursor: pointer;
+  transition: color 0.2s var(--rg-ease), background 0.2s var(--rg-ease), transform 0.2s var(--rg-ease);
+}
+
+.register-page .toggle-password-btn:hover {
+  color: var(--rg-blue-600);
+  background: var(--rg-blue-50);
+  transform: scale(1.08);
+}
+
+/* ---------- Submit button ---------- */
+.register-page .register-btn {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 6px;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--rg-blue-500), var(--rg-blue-600));
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.97rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 8px;
+  box-shadow: var(--rg-shadow-md);
+  transition: transform 0.22s var(--rg-ease), box-shadow 0.22s var(--rg-ease), background 0.22s var(--rg-ease);
 }
 
-.register-btn:hover:not(:disabled) {
-  background: var(--primary-hover);
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+.register-page .register-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.55s var(--rg-ease);
 }
 
-.register-btn:disabled {
-  opacity: 0.65;
+.register-page .register-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--rg-blue-600), var(--rg-blue-700));
+  box-shadow: 0 12px 28px rgba(31, 111, 214, 0.30);
+}
+
+.register-page .register-btn:hover:not(:disabled)::after {
+  left: 130%;
+}
+
+.register-page .register-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+}
+
+.register-page .register-btn:disabled {
+  opacity: 0.7;
   cursor: not-allowed;
 }
 
-.btn-loading {
+.register-page .btn-loading {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-.spinner {
+.register-page .reg-spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-top-color: #fff;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: regSpin 0.8s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes regSpin {
+  to { transform: rotate(360deg); }
 }
 
-/* Institutional Compliance Banner */
-.policy-info-box {
+/* ---------- Compliance note ---------- */
+.register-page .policy-info-box {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 12px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--rg-blue-50);
+  border: 1px solid var(--rg-blue-200);
+  border-radius: 12px;
   font-size: 0.78rem;
-  color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.5;
+  color: var(--rg-ink-700);
+  transition: transform 0.22s var(--rg-ease), box-shadow 0.22s var(--rg-ease);
 }
 
-.policy-info-box svg {
+.register-page .policy-info-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--rg-shadow-sm);
+}
+
+.register-page .policy-info-box svg {
   flex-shrink: 0;
   margin-top: 2px;
-  color: #818cf8;
+  color: var(--rg-blue-500);
 }
 
-/* Links & Footer Nav */
-.login-link {
+.register-page .policy-info-box p {
+  margin: 0;
+}
+
+/* ---------- Links ---------- */
+.register-page .login-link {
+  margin: 0;
   text-align: center;
-  font-size: 0.88rem;
-  color: var(--text-muted);
+  font-size: 0.89rem;
+  color: var(--rg-ink-500);
 }
 
-.login-link span {
-  color: #818cf8;
-  font-weight: 600;
-  cursor: pointer;
+.register-page .login-link span {
   margin-left: 4px;
-  transition: color 0.2s ease;
+  color: var(--rg-blue-600);
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s var(--rg-ease);
 }
 
-.login-link span:hover {
-  color: #c084fc;
+.register-page .login-link span:hover {
+  color: var(--rg-blue-700);
   text-decoration: underline;
 }
 
-.back-btn {
-  margin-top: 24px;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 0.88rem;
+.register-page .reg-back-btn {
+  margin-top: 22px;
+  padding: 9px 20px;
+  background: var(--rg-surface);
+  border: 1.5px solid var(--rg-border);
+  border-radius: 999px;
+  color: var(--rg-ink-700);
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: background 0.22s var(--rg-ease), border-color 0.22s var(--rg-ease),
+              color 0.22s var(--rg-ease), transform 0.22s var(--rg-ease), box-shadow 0.22s var(--rg-ease);
 }
 
-.back-btn:hover {
-  color: var(--text-main);
+.register-page .reg-back-btn:hover {
+  background: var(--rg-blue-50);
+  border-color: var(--rg-blue-300);
+  color: var(--rg-blue-700);
+  transform: translateY(-2px);
+  box-shadow: var(--rg-shadow-sm);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 520px) {
+  .register-page {
+    padding: 24px 14px;
+    align-items: flex-start;
+  }
+
+  .register-page .register-card {
+    padding: 28px 20px 24px;
+  }
+
+  .register-page .register-header h2 {
+    font-size: 1.55rem;
+  }
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .register-page *,
+  .register-page *::before,
+  .register-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.register-page button:focus-visible,
+.register-page .login-link span:focus-visible {
+  outline: 2px solid var(--rg-blue-500);
+  outline-offset: 2px;
 }
